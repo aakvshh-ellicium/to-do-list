@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/498e39f28f.js" crossorigin="anonymous"></script>
     <title>To-do-list</title>
 </head>
 <body>
@@ -13,11 +14,13 @@
         </div>
         <div class="toDoBody">
             <input type="text" id="taskName" placeholder="Add tasks here">
-            <button id="addTask">Add</button>
+            <button id="addTask" onclick="addTasks()">Add</button>
         </div>
 
         <h4 id="alert"></h4>
-        <ul id="listItems"></ul>
+        <ul id="listItems">
+
+        </ul>
     </div>
 
     <!-- Javascript -->
