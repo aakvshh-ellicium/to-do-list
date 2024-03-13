@@ -3,11 +3,9 @@ const addTask = document.getElementById('addTask');
 const alertTask = document.getElementById('alert');
 const listItems = document.getElementById('listItems');
 
-let todo = JSON.parse(localStorage.getItem("todoList"));
 
-function setLocalStorage() {
-    localStorage.setItem("todoList", JSON.stringify(todo));
-}
+let todo = JSON.parse(localStorage.getItem("todoList"));
+(!todo) && (todo = [])
 
 function addTasks(){
     if (inputValue.value === ""){
@@ -30,7 +28,8 @@ function addTasks(){
                         <div>
                             <i class="fa-solid fa-pen" id="editButton" onclick="updateTask(this)"></i>
                             <i class="fa-solid fa-trash" id="deleteButton" onclick="deleteTask(this)"></i>
-                        </div>`
+                        </div>
+                            `
 
         li.innerHTML = task;
         listItems.appendChild(li);
@@ -38,6 +37,7 @@ function addTasks(){
         (!todo) ? todo = [] : null
 
         let itemList = {
+            id: 1,
             item: inputValue.value,
             status: false
         }
@@ -54,7 +54,7 @@ function addTasks(){
 function readTasks(){
     todo?.forEach(element => {
         let li = document.createElement('li');
-        let style = "";
+        let style = "style='display: flex, align-items: center, gap: 2rem;'";
 
         element.status ? style = "style='text-decoration: line-through;'" : style = ""
 
@@ -63,8 +63,9 @@ function readTasks(){
                         </div>
                         <div>
                             ${style === "" ? '<i class="fa-solid fa-pen" id="editButton" onclick="updateTask(this)"></i>' : ''}
+                            
+                            <i class="fa-solid fa-trash" id="deleteButton" onclick="deleteTask(this)"></i>
                         </div>
-                        <i class="fa-solid fa-trash" id="deleteButton" onclick="deleteTask(this)"></i>
                         `
         li.innerHTML = task;
         listItems.appendChild(li)
@@ -80,7 +81,7 @@ function updateTask(e){
         updateText = e.parentElement.parentElement.querySelector('div');
         addTask.setAttribute('onclick', 'updateSelectedTask()')
         addTask.innerText = 'Update'
-
+        inputValue.focus();
     }
     
 }
@@ -110,24 +111,29 @@ function updateSelectedTask(){
 }
 
 function deleteTask(e){
-    let deleteValue = e.parentElement.parentElement.querySelector('div').innerText
+    let deleteValue = e.parentElement.parentElement.querySelector('div').innerText;
 
     if (confirm(`Are you sure you want to delete this task ${deleteValue}?`)){
         e.parentElement.parentElement.setAttribute('class', 'deletedTask')
         inputValue.focus();
 
-        todo.forEach(element => {
+        setLocalStorage();
+        todo.forEach((element) => {
             if (element.item == deleteValue.trim()){
-                todo.splice(element, 1)
+                todo.splice(element, 1);
+                
             }
-
         });
 
+        
+
         setTimeout(() => {
-            e.parentElement.remove();
+            e.parentElement.parentElement.remove();
         }, 1000);
 
-        setLocalStorage();
+        
+
+        
     }
 }
 
@@ -135,7 +141,7 @@ function completedTasks(e){
     if (e.parentElement.querySelector("div").style.textDecoration === "") {
         const tick = document.createElement("span");
         tick.innerHTML = `<i class="fa-solid fa-check"></i>`
-        tick.className = "todoCheck";
+        tick.id = "todoCheck";
         e.parentElement.querySelector("div").style.textDecoration = "line-through";
         e.parentElement.querySelector("div").appendChild(tick);
         e.parentElement.querySelector("#editButton").remove();
@@ -148,12 +154,27 @@ function completedTasks(e){
           }
         });
         setLocalStorage();
-        alert("Todo item Completed Successfully!");
+        // alert("Todo item Completed Successfully!");
     }
 }
 
+function setLocalStorage() {
+    localStorage.setItem("todoList", JSON.stringify(todo));
+}
 
 
+const obj = [
+    {
+        id: 1,
+        name: 'Aakash'
+    },
+    {
+        id: 2,
+        name: 'Aakash'
+    }
+]
 
-
+obj.forEach(element => {
+    console.log(element)
+});
 
