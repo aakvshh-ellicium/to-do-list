@@ -37,7 +37,6 @@ function addTasks(){
         (!todo) ? todo = [] : null
 
         let itemList = {
-            id: 1,
             item: inputValue.value,
             status: false
         }
@@ -102,7 +101,7 @@ function updateSelectedTask(){
     setLocalStorage();
 
     updateText.innerText = inputValue.value;
-    addTask.setAttribute('click', 'addtasks()');
+    addTask.setAttribute('onclick', 'addtasks()');
     addTask.innerText = 'Add';
 
     inputValue.value = '';
@@ -112,27 +111,30 @@ function updateSelectedTask(){
 
 function deleteTask(e){
     let deleteValue = e.parentElement.parentElement.querySelector('div').innerText;
-
+    console.log(deleteValue)
     if (confirm(`Are you sure you want to delete this task ${deleteValue}?`)){
         e.parentElement.parentElement.setAttribute('class', 'deletedTask')
         inputValue.focus();
 
-        setLocalStorage();
-        todo.forEach((element) => {
-            if (element.item == deleteValue.trim()){
-                todo.splice(element, 1);
+       
+        // todo.forEach((element) => {
+        //     if (element.item === deleteValue.trim()){
+        //         todo.splice(element, 1);
                 
-            }
-        });
+        //     }
+            
+        // });
 
+        let deleteIndex = todo.findIndex(element => element.item === deleteValue.trim())
         
+        todo.splice(deleteIndex, 1)
 
         setTimeout(() => {
             e.parentElement.parentElement.remove();
         }, 1000);
 
         
-
+        setLocalStorage();
         
     }
 }
@@ -161,20 +163,4 @@ function completedTasks(e){
 function setLocalStorage() {
     localStorage.setItem("todoList", JSON.stringify(todo));
 }
-
-
-const obj = [
-    {
-        id: 1,
-        name: 'Aakash'
-    },
-    {
-        id: 2,
-        name: 'Aakash'
-    }
-]
-
-obj.forEach(element => {
-    console.log(element)
-});
 
