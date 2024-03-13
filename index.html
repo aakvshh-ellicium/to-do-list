@@ -4,11 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>To-do-list</title>
 </head>
 <body>
-    <h1>Hello World</h1>    
-    
+    <div class="wrapper">
+        <div class="toDoHeader">
+            <h1>To-Do-List Application</h1>
+        </div>
+        <div class="toDoBody">
+            <input type="text" id="taskName" placeholder="Add tasks here">
+            <button id="addTask">Add</button>
+        </div>
+
+        <h4 id="alert"></h4>
+        <ul id="listItems"></ul>
+    </div>
+
+    <!-- Javascript -->
     <script src="main.js"></script>
 </body>
 </html>
