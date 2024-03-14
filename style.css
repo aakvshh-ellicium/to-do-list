@@ -83,6 +83,7 @@ ul li{
     margin: 1vh 0;
     padding: 1em 2em;
     border-radius: 12px;
+    list-style: none;
 }
 
 

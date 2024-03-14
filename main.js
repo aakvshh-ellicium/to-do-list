@@ -2,10 +2,35 @@ const inputValue = document.getElementById('taskName');
 const addTask = document.getElementById('addTask');
 const alertTask = document.getElementById('alert');
 const listItems = document.getElementById('listItems');
-
+const projectInput = document.getElementById('projectName')
+const projectList = document.getElementById('projectList');
 
 let todo = JSON.parse(localStorage.getItem("todoList"));
 (!todo) && (todo = [])
+
+function setLocalStorage() {
+    localStorage.setItem("todoList", JSON.stringify(todo));
+}
+
+function addProject(){
+    if (projectInput.value === ""){
+        alert("Please enter a Project name");
+        projectInput.focus();
+    } else {
+        let li = document.createElement('li');
+
+        const project = `<div>${projectInput.value}</div>`
+
+        li.textContent = projectInput.value;
+        
+        projectList.appendChild(li);
+
+        // let projectList = 
+
+
+
+    }
+}
 
 function addTasks(){
     if (inputValue.value === ""){
@@ -116,7 +141,6 @@ function deleteTask(e){
         e.parentElement.parentElement.setAttribute('class', 'deletedTask')
         inputValue.focus();
 
-       
         // todo.forEach((element) => {
         //     if (element.item === deleteValue.trim()){
         //         todo.splice(element, 1);
@@ -133,7 +157,6 @@ function deleteTask(e){
             e.parentElement.parentElement.remove();
         }, 1000);
 
-        
         setLocalStorage();
         
     }
@@ -160,7 +183,5 @@ function completedTasks(e){
     }
 }
 
-function setLocalStorage() {
-    localStorage.setItem("todoList", JSON.stringify(todo));
-}
+
 
