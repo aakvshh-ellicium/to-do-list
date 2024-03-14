@@ -10,14 +10,19 @@
 <body>
     <section>
         <div class="sidebar">
-            <img src="assets/three-dots.svg" class="threeDots" alt=""><br>
-            <input type="text" id="projectName" placeholder="Add a new list">
-            <button onclick="addProject()">Add Project</button><br><br>
+            <div style="padding: 0.75em 1.25em;">
+                <img src="assets/three-dots.svg" class="threeDots" alt=""><br>
+                <input type="text" id="projectName" placeholder="Add a new list"><br><br>
+                <button onclick="addProject()" class="sidebarButton">Add Project</button>
+                <!-- <button onclick="deleteProject()" class="sidebarButton">Delete Project</button> -->
+                <br><br>
+            </div>
+            <div>
+                <h2 style="color: beige; padding: 0.75em 1.25em;">Workspace</h2>
+                <ul id="projectList">
 
-            <h2>Workspace</h2>
-            <ul id="projectList">
-
-            </ul>
+                </ul>
+            </div>
         </div>
         <div class="wrapper">
             
@@ -27,6 +32,7 @@
             <div class="toDoBody">
                 <input type="text" id="taskName" placeholder="What are your goals for today?">
                 <button id="addTask" onclick="addTasks()">Add</button>
+                <button id="deleteTask" onclick="deleteAllTasks()">Clear All</button>
             </div>
 
             <h4 id="alert"></h4>

@@ -22,12 +22,17 @@ section{
 }
 #taskName{
     padding: 12px 18px;
-    width: 45%;
+    width: 55%;
     margin-right: 1vw;
     /* border-radius: 12px; */
     /* border: none;
     border-bottom: 1px solid #333;
     margin-right: 2vw; */
+}
+#projectName{
+    padding: 12px 18px;
+    /* width: 45%;
+    margin-right: 1vw; */
 }
 .sidebar{
     background-color: #4F6F52;
@@ -36,7 +41,7 @@ section{
     top: 0;
     height: 100vh;
     width: 20vw;
-    padding: 0.75em 1.25em;
+    
     /* border-right: 2px solid #333; */
 }
 .threeDots{
@@ -49,6 +54,19 @@ section{
     justify-content: space-between;
     gap: 2em;
 }
+#listItems li > div{
+    /* width: 100vw; */
+    max-width: 80%;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+    /* text-overflow:; */
+    /* white-space: no-wrap; */
+    /* overflow-wrap: break-word; */
+}
+#listItems li div:nth-child(2){
+    display: flex;
+    justify-content: right;
+}
 
 #addTask{
     padding: 16px 28px;
@@ -58,6 +76,24 @@ section{
     border: none;
     outline: none;
     border-radius: 18px;
+}
+#deleteTask{
+    padding: 16px 28px;
+    cursor: pointer;
+    background: #d24545;
+    color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 18px;
+}
+.sidebarButton{
+    padding: 16px 12px;
+    cursor: pointer;
+    background: #3A4D39;
+    color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 12px;
 }
 #editButton{
     margin-right: 2vw;
@@ -78,12 +114,28 @@ ul{
     margin: 3rem;
 }
 
+#projectList{
+    margin: 0;
+}
+
+#projectList li{
+    min-width: 100%;
+    padding:  1em 4em;
+    border-radius: 0;
+    background-color: #6a946e;
+    
+}
+#projectList li div{
+    display: flex;
+    justify-content:center;
+}
+
 ul li{
     background-color: #E4E4D0;
     margin: 1vh 0;
     padding: 1em 2em;
     border-radius: 12px;
     list-style: none;
+    height: auto;
+    list-style-position: none;
 }
-
-

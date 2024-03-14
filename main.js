@@ -7,28 +7,50 @@ const projectList = document.getElementById('projectList');
 
 let todo = JSON.parse(localStorage.getItem("todoList"));
 (!todo) && (todo = [])
+console.log(todo)
+
+let todoProjects = JSON.parse(localStorage.getItem("projectsList"));
+(!todoProjects) && (todoProjects = [])
+console.log(todo)
 
 function setLocalStorage() {
     localStorage.setItem("todoList", JSON.stringify(todo));
+    localStorage.setItem("projectsList", JSON.stringify(todoProjects));localStorage.setItem("todoList", JSON.stringify(todo));
 }
+let count = 0;
 
 function addProject(){
     if (projectInput.value === ""){
         alert("Please enter a Project name");
         projectInput.focus();
     } else {
-        let li = document.createElement('li');
+        let isProjectPresent = false;
 
-        const project = `<div>${projectInput.value}</div>`
+        todo?.forEach(element => {
+            (element.item == inputValue.value) && (isProjectPresent = true);
+        });
+        if (isProjectPresent == true) {
+            alert("This project is already present") ;
+        }
+        else {
+            let li = document.createElement('li');
 
-        li.textContent = projectInput.value;
+            const project = `<div>${projectInput.value}</div>`
+
+            li.innerHTML = project;
+            
+            projectList.appendChild(li);
+
+            (!todo) ? todo = [] : null
+
+            let projectsList = {
+                id: `${count++}`,
+            }
+            todoProjects.push(projectsList)
+            console.log(todo)
+            setLocalStorage();
+        }
         
-        projectList.appendChild(li);
-
-        // let projectList = 
-
-
-
     }
 }
 
@@ -40,36 +62,39 @@ function addTasks(){
         let isTaskPresent = false;
 
         todo?.forEach(element => {
-            (element.item == inputValue.value) && (isTaskPresent = true);
+            (element.item == inputValue.value.trim()) && (isTaskPresent = true);
         });
 
-        isTaskPresent == true && alert("This task is already present");
+        if (isTaskPresent == true) {
+            alert("This task is already present")
+        } else {
 
-        let li = document.createElement('li')
+            let li = document.createElement('li')
 
-        const task =    `<div ondblclick="completedTasks(this)">
-                            ${inputValue.value}
-                        </div>
-                        <div>
-                            <i class="fa-solid fa-pen" id="editButton" onclick="updateTask(this)"></i>
-                            <i class="fa-solid fa-trash" id="deleteButton" onclick="deleteTask(this)"></i>
-                        </div>
-                            `
+            const task =    `<div ondblclick="completedTasks(this)">
+                                ${inputValue.value}
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-pen" id="editButton" onclick="updateTask(this)"></i>
+                                <i class="fa-solid fa-trash" id="deleteButton" onclick="deleteTask(this)"></i>
+                            </div>
+                                `
 
-        li.innerHTML = task;
-        listItems.appendChild(li);
+            li.innerHTML = task;
+            listItems.appendChild(li);
 
-        (!todo) ? todo = [] : null
+            (!todo) ? todo = [] : null
 
-        let itemList = {
-            item: inputValue.value,
-            status: false
+            let itemList = {
+                item: inputValue.value,
+                status: false
+            }
+
+            todo.push(itemList);
+            console.log(todo)
+            setLocalStorage();
+            alert("Task added successfully!");
         }
-
-        todo.push(itemList);
-        console.log(todo)
-        setLocalStorage();
-        alert("Task added successfully!");
     }
     inputValue.value = '';
            
@@ -159,6 +184,16 @@ function deleteTask(e){
 
         setLocalStorage();
         
+    }
+}
+
+function deleteAllTasks(e){
+    if (confirm(`Are you sure you want to delete all tasks?`)){
+        localStorage.clear();
+        console.log(document.querySelector('#listItems'))
+        setTimeout(() => {
+            document.querySelector('#listItems').remove();
+        }, 1000);
     }
 }
 
